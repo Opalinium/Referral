@@ -165,7 +165,34 @@ public class Database {
 		
 		return false;
 	}
-	
+
+	public List<String> getReferredPlayers(String referrerUUID) {
+		List<String> referredPlayers = new ArrayList<>();
+
+		try {
+			if (!PlayerExists(referrerUUID)) {
+				return referredPlayers;
+			}
+
+			PreparedStatement statement = getConnection().prepareStatement("SELECT UUID FROM " + table + " WHERE REFERRED=?");
+			statement.setString(1, referrerUUID);
+
+			ResultSet result = statement.executeQuery();
+
+			while (result.next()) {
+				referredPlayers.add(result.getString("UUID"));
+			}
+
+			statement.close();
+
+		} catch (SQLException e) {
+			System.out.print("Error Function getReferredPlayers");
+			e.printStackTrace();
+		}
+
+		return referredPlayers;
+	}
+
 	public void CreatePlayer(String playerUUID, String playerName) {
 		try {
 			if (PlayerExists(playerUUID)) {
