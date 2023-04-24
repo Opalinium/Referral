@@ -3,3 +3,10 @@
 .project
 /.settings/
 /target/
+.idea/vcs.xml
+.idea/misc.xml
+.idea/jarRepositories.xml
+.idea/discord.xml
+.idea/compiler.xml
+.gitignore
+
